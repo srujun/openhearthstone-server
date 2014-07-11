@@ -1,4 +1,4 @@
-package com.openhearthstone.server;
+package com.srujun.openhearthstone.server;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
