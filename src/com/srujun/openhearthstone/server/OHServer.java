@@ -4,17 +4,23 @@ import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
+import com.mongodb.DB;
+import com.mongodb.MongoClient;
 
 import java.io.IOException;
 
-public class TestServer {
-    private Server server;
+public class OHServer {
+    public DB db;
 
-    TestServer() {
+    public static OHServer instance;
+    private Server server;
+    private MongoClient mongoClient;
+
+    private OHServer() {
         server = new Server();
         server.addListener(new TestListener());
 
-        registerObjects();
+        registerPacketObjects();
 
         try {
             server.bind(6391);
@@ -23,36 +29,31 @@ public class TestServer {
         }
 
         server.start();
-        System.out.println("Server started!");
     }
 
-    private void registerObjects() {
+    private void registerPacketObjects() {
         Kryo kryo = server.getKryo();
     }
 
     public static void main(String args[]) {
-        new TestServer();
+       instance = new OHServer();
     }
 
-    static class TestListener extends Listener {
+    class TestListener extends Listener {
         @Override
         public void connected(Connection connection) {
-            System.out.println("Connection: " + connection.getRemoteAddressTCP());
         }
 
         @Override
         public void disconnected(Connection connection) {
-
         }
 
         @Override
         public void received(Connection connection, Object object) {
-
         }
 
         @Override
         public void idle(Connection connection) {
-
         }
     }
 }
