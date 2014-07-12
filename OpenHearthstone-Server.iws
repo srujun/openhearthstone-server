@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37e1b653-c740-49ee-862f-f40b62f39a56" name="Default" comment="">
-      <change type="MOVED" beforePath="C:\Users\Srujun\Projects\OpenHearthstone-Server\src\com\srujun\openhearthstone\server\TestServer.java" afterPath="$PROJECT_DIR$/src/com/srujun/openhearthstone/server/OHServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OpenHearthstone-Server.iml" afterPath="$PROJECT_DIR$/OpenHearthstone-Server.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OpenHearthstone-Server.ipr" afterPath="$PROJECT_DIR$/OpenHearthstone-Server.ipr" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/srujun/openhearthstone/server/KryoPackets.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/srujun/openhearthstone/server/OHServer.java" afterPath="$PROJECT_DIR$/src/com/srujun/openhearthstone/server/OHServer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OpenHearthstone-Server.iws" afterPath="$PROJECT_DIR$/OpenHearthstone-Server.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Procfile" afterPath="$PROJECT_DIR$/Procfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="OpenHearthstone-Server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -73,14 +70,26 @@
       <file leaf-file-name="OHServer.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/srujun/openhearthstone/server/OHServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.79931194" vertical-offset="0" max-vertical-offset="1105">
-              <caret line="41" column="41" selection-start-line="41" selection-start-column="41" selection-end-line="41" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.8165138" vertical-offset="788" max-vertical-offset="1820">
+              <caret line="75" column="27" selection-start-line="75" selection-start-column="27" selection-end-line="75" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#785#786#0" expanded="true" />
-                <element signature="e#829#830#0" expanded="true" />
-                <element signature="e#875#876#0" expanded="true" />
-                <element signature="e#915#916#0" expanded="true" />
+                <element signature="e#1337#1338#0" expanded="true" />
+                <element signature="e#1377#1378#0" expanded="true" />
+                <element signature="e#1402#1403#0" expanded="true" />
+                <element signature="e#1427#1428#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="KryoPackets.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/srujun/openhearthstone/server/KryoPackets.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="1020">
+              <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -118,6 +127,8 @@
         <option value="$PROJECT_DIR$/src/com/srujun/openhearthstone/server/logger/NetworkHelper.java" />
         <option value="$PROJECT_DIR$/src/com/srujun/openhearthstone/server/logger/RemoteLoggingServer.java" />
         <option value="$PROJECT_DIR$/src/com/srujun/openhearthstone/server/logger/RemoteLoggingClient.java" />
+        <option value="$PROJECT_DIR$/src/com/srujun/openhearthstone/server/Packets.java" />
+        <option value="$PROJECT_DIR$/src/com/srujun/openhearthstone/server/KryoPackets.java" />
         <option value="$PROJECT_DIR$/src/com/srujun/openhearthstone/server/OHServer.java" />
       </list>
     </option>
@@ -512,10 +523,10 @@
           <caret line="36" column="48" selection-start-line="36" selection-start-column="48" selection-end-line="36" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#785#786#0" expanded="true" />
-            <element signature="e#829#830#0" expanded="true" />
-            <element signature="e#875#876#0" expanded="true" />
-            <element signature="e#915#916#0" expanded="true" />
+            <element signature="e#1337#1338#0" expanded="true" />
+            <element signature="e#1377#1378#0" expanded="true" />
+            <element signature="e#1402#1403#0" expanded="true" />
+            <element signature="e#1427#1428#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -534,14 +545,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Procfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="872">
-          <caret line="0" column="99" selection-start-line="0" selection-start-column="99" selection-end-line="0" selection-end-column="99" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901">
@@ -550,16 +553,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/srujun/openhearthstone/server/OHServer.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/esotericsoftware/kryo/kryo/2.24.0/kryo-2.24.0.jar!/com/esotericsoftware/kryo/Kryo.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.79931194" vertical-offset="0" max-vertical-offset="1105">
-          <caret line="41" column="41" selection-start-line="41" selection-start-column="41" selection-end-line="41" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.42446044" vertical-offset="1465" max-vertical-offset="3383">
+          <caret line="108" column="16" selection-start-line="108" selection-start-column="16" selection-end-line="108" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/system.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="872">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Procfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="872">
+          <caret line="0" column="99" selection-start-line="0" selection-start-column="99" selection-end-line="0" selection-end-column="99" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/srujun/openhearthstone/server/KryoPackets.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="1020">
+          <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#785#786#0" expanded="true" />
-            <element signature="e#829#830#0" expanded="true" />
-            <element signature="e#875#876#0" expanded="true" />
-            <element signature="e#915#916#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/srujun/openhearthstone/server/OHServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8165138" vertical-offset="788" max-vertical-offset="1820">
+          <caret line="75" column="27" selection-start-line="75" selection-start-column="27" selection-end-line="75" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1337#1338#0" expanded="true" />
+            <element signature="e#1377#1378#0" expanded="true" />
+            <element signature="e#1402#1403#0" expanded="true" />
+            <element signature="e#1427#1428#0" expanded="true" />
           </folding>
         </state>
       </provider>
