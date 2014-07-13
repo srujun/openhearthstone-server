@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 
 public class OHServer {
-    public static final int PORT = 6391;
+    public static final int PORT = Integer.valueOf(System.getenv("PORT")); // 6391
 
     public static OHServer instance;
 
