@@ -7,7 +7,7 @@ import java.net.Socket;
 
 public class TestServer {
     public static void main(String[] args) throws IOException {
-        ServerSocket listener = new ServerSocket(6391);
+        ServerSocket listener = new ServerSocket(Integer.parseInt(System.getenv("PORT")));
         try {
             while (true) {
                 Socket socket = listener.accept();
