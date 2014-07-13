@@ -1,1 +1,1 @@
-web:    java $JAVA_OPTS -cp target/classes:target/dependency/* com.srujun.openhearthstone.server.OHServer
+web:    java $JAVA_OPTS -cp target/classes:target/dependency/* com.srujun.openhearthstone.server.TestServer
