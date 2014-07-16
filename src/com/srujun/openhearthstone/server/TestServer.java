@@ -7,8 +7,8 @@ import java.net.Socket;
 
 public class TestServer {
     public static void main(String[] args) throws IOException {
-        ServerSocket listener = new ServerSocket(Integer.parseInt(System.getenv("PORT")));
-        System.out.println("Listening on: " + System.getenv("PORT"));
+        ServerSocket listener = new ServerSocket(OHServer.PORT);
+        System.out.println("Listening on: " + OHServer.PORT);
         try {
             while (true) {
                 Socket socket = listener.accept();

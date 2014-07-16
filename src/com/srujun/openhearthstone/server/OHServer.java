@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 
 public class OHServer {
-    public static final int PORT = Integer.valueOf(System.getenv("PORT")); // 6391
+    public static final int PORT = 6391;
 
     public static OHServer instance;
 
@@ -39,6 +39,7 @@ public class OHServer {
             mongoClientURI = new MongoClientURI(System.getenv("MONGOHQ_URL"));
             mongo = new MongoClient(mongoClientURI);
         } catch (UnknownHostException e) {
+            System.out.println("Error connecting to MongoHQ.");
             System.out.println(e.getMessage());
         } finally {
             db = mongo.getDB(mongoClientURI.getDatabase());
