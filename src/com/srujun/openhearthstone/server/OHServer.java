@@ -1,12 +1,10 @@
 package com.srujun.openhearthstone.server;
 
-import com.esotericsoftware.kryonet.Connection;
-import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
-import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import com.srujun.openhearthstone.server.listeners.LoginListener;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -14,16 +12,17 @@ import java.net.UnknownHostException;
 public class OHServer {
     public static final int PORT = 6391;
 
-    public static OHServer instance;
-
     private Server server;
-    private MongoClient mongo;
+
     private MongoClientURI mongoClientURI;
-    private DB db;
+    private static MongoClient mongo;
+    private static DB db;
+
+    public static OHServer instance;
 
     private OHServer() {
         server = new Server();
-        server.addListener(new TestListener());
+        server.addListener(new LoginListener());
         KryoPackets.registerPacketObjects(server);
 
         // Start Kryo Server
@@ -46,41 +45,11 @@ public class OHServer {
         }
     }
 
-    public static void main(String args[]) {
-       instance = new OHServer();
-    }
-
-    public DB getDB() {
+    public static DB getDB() {
         return db;
     }
 
-    class TestListener extends Listener {
-        @Override
-        public void connected(Connection connection) {
-        }
-
-        @Override
-        public void disconnected(Connection connection) {
-        }
-
-        @Override
-        public void received(Connection connection, Object object) {
-            if(object instanceof KryoPackets.Credentials) {
-                KryoPackets.Credentials cred = (KryoPackets.Credentials) object;
-                BasicDBObject newUser = new BasicDBObject("username", cred.username);
-
-                if(db.getCollection("oh_users").findOne(newUser) == null) {
-                    db.getCollection("oh_users").insert(newUser);
-                    return;
-                } else {
-                    connection.sendTCP(new KryoPackets.Credentials.UserExists());
-                    return;
-                }
-            }
-        }
-
-        @Override
-        public void idle(Connection connection) {
-        }
+    public static void main(String args[]) {
+       instance = new OHServer();
     }
 }

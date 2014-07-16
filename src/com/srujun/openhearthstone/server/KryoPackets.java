@@ -11,15 +11,26 @@ public class KryoPackets {
         Kryo kryo = server.getKryo();
 
         kryo.register(Credentials.class);
-        kryo.register(Card.class);
-        kryo.register(Deck.class);
-        kryo.register(Deck[].class);
+        kryo.register(Credentials.InvalidUsername.class);
+        kryo.register(Credentials.UserExists.class);
+        kryo.register(Credentials.UsernameNotFound.class);
+        kryo.register(Credentials.LoggedIn.class);
     }
 
     static public class Credentials {
+        static public class InvalidUsername {
+        }
+
         static public class UserExists {
         }
 
+        static public class UsernameNotFound {
+        }
+
+        static public class LoggedIn {
+        }
+
+        public boolean isNewUsername;
         public String username;
     }
 
