@@ -50,6 +50,18 @@ public class OHServer {
     }
 
     public static void main(String args[]) {
-       instance = new OHServer();
+        instance = new OHServer();
+
+        // Update cards database
+        (new Thread("update-cards-db") {
+            @Override
+            public void run() {
+                System.out.println("[DB] Starting cards database update.");
+                CardDatabaseManager cdm = new CardDatabaseManager();
+                cdm.updateDatabase();
+
+                System.out.println("[DB] Database card count: " + OHServer.getDB().getCollection("hh-cards").count());
+            }
+        }).start();
     }
 }
