@@ -1,9 +1,6 @@
 package com.srujun.openhearthstone.server;
 
-import com.mongodb.BasicDBList;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
+import com.mongodb.*;
 import com.mongodb.util.JSON;
 
 import java.io.BufferedReader;
@@ -21,9 +18,25 @@ public class CardDatabaseManager {
 
     private int cardsUpdated;
     private int cardsAdded;
+    private int cardsDeleted;
 
     public CardDatabaseManager() {
 
+    }
+
+    public void deleteDatabase() {
+        // Reset counter.
+        cardsDeleted = 0;
+
+        DBCursor cardsCursor = OHServer.getCollection(OHServer.Collections.CARDS).find();
+        int cardCount = cardsCursor.count();
+
+        for(DBObject card : cardsCursor) {
+            OHServer.getCollection(OHServer.Collections.CARDS).remove(card);
+            cardsDeleted++;
+        }
+
+        System.out.println("[DB] Deleted " + cardCount + " cards.");
     }
 
     public void updateDatabase() {
@@ -40,7 +53,7 @@ public class CardDatabaseManager {
     }
 
     private void updateCards(String url) {
-        DBCollection cardsCol = OHServer.getDB().getCollection("hh-cards");
+        DBCollection cardsCol = OHServer.getCollection(OHServer.Collections.CARDS);
 
         // Get cards from Hearthhead as a List
         BasicDBList newCards = getCardsAsList(url);
@@ -54,7 +67,7 @@ public class CardDatabaseManager {
                 // The exact card doesn't exist in the DB, so...
                 // Check if the new card's ID exists in the DB.
                 BasicDBObject query = new BasicDBObject("id", newCard.get("id"));
-                BasicDBObject similarCard = (BasicDBObject)cardsCol.findOne(query);
+                BasicDBObject similarCard = (BasicDBObject) cardsCol.findOne(query);
 
                 if(similarCard == null) {
                     // Card isn't in DB. Let's add it!
@@ -62,13 +75,29 @@ public class CardDatabaseManager {
                     cardsCol.insert(newCard);
                     cardsAdded++;
                 } else {
-                    // Card needs to be updated!
-                    System.out.println("[DB] Card updated: " + newCard.get("id") + "-" + newCard.get("name"));
+                    // Card with similar id exists.
+                    // So card needs to be updated!
                     cardsCol.update(query, newCard);
+                    System.out.print("[DB] Card updated: " + newCard.get("id") + "-" + newCard.get("name") + ". ");
+                    System.out.println("Changes: " + printDifferences(similarCard, newCard));
                     cardsUpdated++;
                 }
             }
         }
+    }
+
+    private String printDifferences(BasicDBObject origObj, BasicDBObject newObj) {
+        StringBuilder sb = new StringBuilder();
+
+        for(String key : newObj.keySet()) {
+            Object origVal = origObj.get(key);
+            Object newVal = newObj.get(key);
+            if(!newVal.equals(origVal)) {
+                sb.append(key + ":" + origVal + ">" + newVal + " | ");
+            }
+        }
+
+        return sb.toString();
     }
 
     private BasicDBList getCardsAsList(String url) {
