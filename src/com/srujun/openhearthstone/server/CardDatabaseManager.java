@@ -1,5 +1,6 @@
 package com.srujun.openhearthstone.server;
 
+import com.esotericsoftware.minlog.Log;
 import com.mongodb.*;
 import com.mongodb.util.JSON;
 
@@ -29,14 +30,13 @@ public class CardDatabaseManager {
         cardsDeleted = 0;
 
         DBCursor cardsCursor = OHServer.getCollection(OHServer.Collections.CARDS).find();
-        int cardCount = cardsCursor.count();
 
         for(DBObject card : cardsCursor) {
             OHServer.getCollection(OHServer.Collections.CARDS).remove(card);
             cardsDeleted++;
         }
 
-        System.out.println("[DB] Deleted " + cardCount + " cards.");
+        Log.info("DB", "[DB] Deleted " + cardsDeleted + " cards.");
     }
 
     public void updateDatabase() {
@@ -48,8 +48,8 @@ public class CardDatabaseManager {
         // Update uncollectible cards
         updateCards(this.HEARTHHEAD_CARDS_UNCOLLECTIBLE);
 
-        System.out.println("[DB] Cards updated: " + cardsUpdated);
-        System.out.println("[DB] Cards added: " + cardsAdded);
+        Log.info("DB", "Cards updated: " + cardsUpdated);
+        Log.info("DB", "Cards added: " + cardsAdded);
     }
 
     private void updateCards(String url) {
@@ -71,15 +71,15 @@ public class CardDatabaseManager {
 
                 if(similarCard == null) {
                     // Card isn't in DB. Let's add it!
-                    System.out.println("[DB] New card: " + newCard.get("id") + "-" + newCard.get("name"));
+                    Log.info("DB", "New card: " + newCard.get("id") + "-" + newCard.get("name"));
                     cardsCol.insert(newCard);
                     cardsAdded++;
                 } else {
                     // Card with similar id exists.
                     // So card needs to be updated!
                     cardsCol.update(query, newCard);
-                    System.out.print("[DB] Card updated: " + newCard.get("id") + "-" + newCard.get("name") + ". ");
-                    System.out.println("Changes: " + printDifferences(similarCard, newCard));
+                    Log.info("DB", "Card updated: " + newCard.get("id") + "-" + newCard.get("name") + ". " +
+                            "Changes: " + printDifferences(similarCard, newCard));
                     cardsUpdated++;
                 }
             }
